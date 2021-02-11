@@ -1,0 +1,18 @@
+bitmax:
+  base-url: "https://bitmax.io"
+  wss-endpoint: "bitmax.io"
+  wss-port: 443
+  group: <your-account-group>
+  apikey: "<your-api-key>"
+  secret: "<your-api-secret>"
+  ssl: True
+
+
+bitmax-sandbox:
+  base-url: "https://api-test.bitmax-sandbox.io/"
+  wss-endpoint: "api-test.bitmax-sandbox.io"
+  wss-port: 443
+  group: 1
+  apikey: "qlvykCgqtmNarH0zZtJLlaHInoVs7eFxx"
+  secret: "z5MtL2CbJ8qsxL2BfcvC23RfP2nJ6jNADawR9HwVgsvecmS6HwziMTXNT4Adt8WW"
+  ssl: True
