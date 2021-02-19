@@ -79,7 +79,6 @@ class PriceFilter:
     maxPrice: Decimal
     minPrice: Decimal
     tickSize: Decimal
-    priceScale: int
 
     def __post_init__(self):
         self.maxPrice = Decimal(self.maxPrice)
@@ -91,8 +90,7 @@ class LotSizeFilter:
     maxQty: Decimal
     minQty: Decimal
     lotSize: Decimal
-    qtyScale: int
-
+    
     def __post_init__(self):
         self.maxQty = Decimal(self.maxQty)
         self.minQty = Decimal(self.minQty)
@@ -100,14 +98,14 @@ class LotSizeFilter:
 
 @dataclass
 class MarginRequirement:
-    positionNotionalLowerbound: Decimal
-    positionNotionalUpperbound: Decimal
+    positionNotionalLowerBound: Decimal
+    positionNotionalUpperBound: Decimal
     initialMarginRate: Decimal
     maintenanceMarginRate: Decimal
 
     def __post_init__(self):
-        self.positionNotionalLowerbound = Decimal(self.positionNotionalLowerbound)
-        self.positionNotionalUpperbound = Decimal(self.positionNotionalUpperbound)
+        self.positionNotionalLowerBound = Decimal(self.positionNotionalLowerBound)
+        self.positionNotionalUpperBound = Decimal(self.positionNotionalUpperBound)
         self.initialMarginRate = Decimal(self.initialMarginRate)
         self.maintenanceMarginRate = Decimal(self.maintenanceMarginRate)
 
@@ -116,8 +114,7 @@ class FuturesContractInfo:
     symbol: str
     displayName: str
     status: str
-    quoteAsset: str
-    baseAsset: str
+    settlementAsset: str
     underlying: str
     priceFilter: PriceFilter
     lotSizeFilter: LotSizeFilter
@@ -133,7 +130,7 @@ class FuturesContractInfo:
         self.priceFilter = PriceFilter(**self.priceFilter)
         self.lotSizeFilter = LotSizeFilter(**self.lotSizeFilter)
         marginRequirements = list(MarginRequirement(**x) for x in self.marginRequirements)
-        self.marginRequirements = sorted(marginRequirements, key = lambda x: x.positionNotionalUpperbound)
+        self.marginRequirements = sorted(marginRequirements, key = lambda x: x.positionNotionalUpperBound)
         self.commissionReserveRate = Decimal(self.commissionReserveRate)
         self.commissionType = CommissionType._member_map_[self.commissionType.lower()]
         self.marketOrderPriceMarkup = Decimal(self.marketOrderPriceMarkup)
