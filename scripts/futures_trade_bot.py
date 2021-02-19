@@ -51,7 +51,7 @@ def create_protocol(apikey, secret):
             scheduler.start()
             # self.authenticate()
 
-            self.send("""{"op":"sub","id":"abc123456","ch":"depth-realtime:BTC-PERP"}""")
+            # self.send("""{"op":"sub","id":"abc123456","ch":"depth-realtime:BTC-PERP"}""")
             # self.send("""{"op":"sub","id":"abc123456","ch":"bbo:BTC-PERP"}""")
             # self.send("""{"op":"sub","id":"abc123456","ch":"futures-pricing-data"}""")
             # self.send("""{"op":"sub","id":"abc123456","ch":"futures-order"}""")
@@ -59,7 +59,11 @@ def create_protocol(apikey, secret):
             # self.send("""{"op":"req","id":"abc123456","action":"futures-account-snapshot"}""")
             # self.send("""{"op":"req","id":"abc123456","action":"futures-open-orders"}""")
             # self.send("""{"op":"req","id":"abc123456","action":"depth-snapshot-top100", "args": {"symbol":"BTC-PERP"} }""")
+            # self.send("""{"op":"req","id":"abc123456","action":"depth-snapshot-realtime", "args": {"symbol":"BTC-PERP"} }""")
             # self.send("""{"op":"req","action":"barhist","id":"abc123456","args":{"symbol":"BTC-PERP","interval":"1d","from":1579427383528,"to":1610531443528,"v":null}}""")
+            # self.send("""{"op":"req","action":"barhist","id":"abc123456","args":{"symbol":"BTC-PERP","interval":"1d","from":1579427383528,"to":1610531443528,"v":null}}""")
+
+            self.send("""{"op":"req","action":"place-order","id":"abc123456","ac":"cash","args":{"symbol":"BTC-PERP","orderPrice":"35000","orderQty":"0.01"}}""")
 
             print("WebSocket connection open.")
 
@@ -226,7 +230,7 @@ async def open_order(symbol):
 
 @click.command()
 @click.option("--config", type=str, default="conf.yaml")
-@click.option("--botname", type=click.Choice(["bitmax", "bitmax-sandbox", "bitmax-local"]), default="bitmax-sandbox")
+@click.option("--botname", type=click.Choice(["bitmax", "bitmax-sandbox", "bitmax-local", "bitmax-api-test"]), default="bitmax-sandbox")
 @click.option("--log-level", type=click.Choice(["debug", "info", "warning", "error", "critical"]), default="warning")
 @click.option("--server-port", type=int, default=5000)
 def run(config, botname, log_level, server_port):
