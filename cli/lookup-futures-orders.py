@@ -22,7 +22,7 @@ def run(config, botname, order_id, verbose):
     secret = cfg['secret']
 
     path = "v2/futures/order/status"
-    url = f"{host}/api/pro/" + path
+    url = f"{host}/{group}/api/pro/" + path
 
     ts = utc_timestamp()
 
