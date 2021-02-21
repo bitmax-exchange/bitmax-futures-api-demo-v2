@@ -63,7 +63,7 @@ def create_protocol(apikey, secret):
             # self.send("""{"op":"req","action":"barhist","id":"abc123456","args":{"symbol":"BTC-PERP","interval":"1d","from":1579427383528,"to":1610531443528,"v":null}}""")
             # self.send("""{"op":"req","action":"barhist","id":"abc123456","args":{"symbol":"BTC-PERP","interval":"1d","from":1579427383528,"to":1610531443528,"v":null}}""")
 
-            self.send("""{"op":"req","action":"place-order","id":"abc123456","ac":"futures","args":{"symbol":"BTC-PERP","orderPrice":"20","orderQty":"0.01","orderType":"limit","side":"buy"}}""")
+            self.send("""{"op":"req","action":"place-order","id":"sampleRequestId","ac":"futures","args":{"id":"sampleOrderId","symbol":"BTC-PERP","orderPrice":"40000","orderQty":"0.01","orderType":"limit","side":"buy"}}""")
 
             print("WebSocket connection open.")
 
