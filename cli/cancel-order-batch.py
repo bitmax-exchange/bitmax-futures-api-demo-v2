@@ -8,7 +8,7 @@ from util import *
 
 @click.command()
 @click.option("--config", type=str, default=None, help="path to the config file")
-@click.option("--botname", type=click.Choice(["bitmax", "bitmax-sandbox"]), default="bitmax-sandbox", help="specify the bot to use")
+@click.option("--botname", type=str, default="bitmax-sandbox", help="specify the bot to use")
 @click.option("--symbol", type=str, default='BTC-PERP')
 @click.option("--order-id", type=str, required=True)
 @click.option('--verbose/--no-verbose', default=False)
@@ -32,7 +32,7 @@ def run(config, botname, symbol, order_id, verbose):
     I = lambda s: s * (num // len(s))
 
     orders = []
-    for (s, i) in zip(I(vs), I(vi)):
+    for (s, i) in zip(I(vs), I(vi)) :
         orders.append(dict(
             id = uuid32(),
             time = ts,
