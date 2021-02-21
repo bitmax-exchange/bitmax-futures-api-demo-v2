@@ -25,7 +25,8 @@ class FuturesRiskEngine(object):
         self.open_orders = None
 
         if apikey is not None and secret is not None:
-            self.api.authenticate()
+            # self.api.authenticate()
+            pass
 
     def initialize(self):
         self.refresh_futures_contract_info()
