@@ -9,7 +9,7 @@ from util import *
 
 @click.command()
 @click.option("--config", type=str, default=None, help="path to the config file")
-@click.option("--botname", type=click.Choice(["bitmax", "bitmax-sandbox"]), default="bitmax-sandbox", help="specify the bot to use")
+@click.option("--botname", type=str, default="bitmax-sandbox", help="specify the bot to use")
 @click.option("--symbol", type=str, default='BTC-PERP')
 @click.option("--price", type=str, default='30000')
 @click.option("--qty", type=str, default='0.1')
@@ -18,7 +18,7 @@ from util import *
 @click.option('--verbose/--no-verbose', default=False)
 def run(config, botname, symbol, price, qty, order_type, side, verbose):
     
-    cfg = load_config(get_config_or_default(config), "bitmax-sandbox")
+    cfg = load_config(get_config_or_default(config), botname)
 
     host = cfg['base-url']
     group = cfg['group']
