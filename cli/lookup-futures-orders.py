@@ -9,7 +9,7 @@ from util import *
 
 @click.command()
 @click.option("--config", type=str, default=None, help="path to the config file")
-@click.option("--botname", type=click.Choice(["bitmax", "bitmax-sandbox"]), default="bitmax-sandbox", help="specify the bot to use")
+@click.option("--botname", type=str, default="bitmax-sandbox", help="specify the bot to use")
 @click.option("--order-id", type=str, required=True, help="a single order Id, or multiple orderId separated by comma")
 @click.option('--verbose/--no-verbose', default=False)
 def run(config, botname, order_id, verbose):
