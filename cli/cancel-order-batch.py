@@ -42,7 +42,7 @@ def run(config, botname, symbol, order_id, verbose):
 
     if verbose:
         print(f"url: {url}")
-        print(f"order: {cancelOrder}")
+        print(f"order: {orders}")
 
     headers = make_auth_headers(ts, "v2/futures/order", apikey, secret)
     res = requests.delete(url, headers=headers, json=orders)
