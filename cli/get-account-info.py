@@ -20,14 +20,14 @@ def run(config, botname, verbose):
     apikey = cfg['apikey']
     secret = cfg['secret']
 
-    url = f"{host}/api/pro/v1/info"
+    url = f"{host}/api/pro/v2/account/info"
 
     ts = utc_timestamp()
 
     if verbose:
         print(f"url: {url}")
 
-    headers = make_auth_headers(ts, "info", apikey, secret)
+    headers = make_auth_headers(ts, "v2/account/info", apikey, secret)
     res = requests.get(url, headers=headers)
 
     data = parse_response(res)

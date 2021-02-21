@@ -59,7 +59,7 @@ class Bbo: # TODO: this data should be fixed.
 @dataclass
 class RefPrice:
     asset: str = None
-    quoteAsset: str = None
+    settlementAsset: str = None
     time: int = None
     price: Decimal = None
 
@@ -70,7 +70,7 @@ class RefPrice:
 
     def __post_init__(self, a, q, t, p):
         self.asset = self.asset or a
-        self.quoteAsset = self.quoteAsset or q
+        self.settlementAsset = self.settlementAsset or q
         self.time = self.time or t
         self.price = Decimal(self.price or p)
 
@@ -90,7 +90,7 @@ class LotSizeFilter:
     maxQty: Decimal
     minQty: Decimal
     lotSize: Decimal
-    
+
     def __post_init__(self):
         self.maxQty = Decimal(self.maxQty)
         self.minQty = Decimal(self.minQty)
@@ -251,6 +251,7 @@ class FuturesAccountPosition:
     t: InitVar[int] = -1
     m: InitVar[str] = None
     id: InitVar[str] = None
+    sn: int = -1
 
     col: InitVar[List[FuturesCollateralBalance]] = None
     pos: InitVar[List[FuturesContractPosition]] = None
