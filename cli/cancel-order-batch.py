@@ -32,7 +32,7 @@ def run(config, botname, symbol, order_id, verbose):
     I = lambda s: s * (num // len(s))
 
     orders = []
-    for (s, i) in zip(vs, vi):
+    for (s, i) in zip(I(vs), I(vi)):
         orders.append(dict(
             id = uuid32(),
             time = ts,
