@@ -40,9 +40,9 @@ def run(config, botname, symbol, price, qty, order_type, side, verbose):
 
     I = lambda s: s * (num // len(s))
 
-    orders = []
+    orders_to_place = {"orders":[],}
     for (s, p, q, t, sd) in zip(I(vs), I(vp), I(vq), I(vt), I(vsd)):
-        orders.append(dict(
+        orders_to_place["orders"].append(dict(
             id = uuid32(),
             time = ts,
             symbol = s,
@@ -54,10 +54,10 @@ def run(config, botname, symbol, price, qty, order_type, side, verbose):
 
     if verbose:
         print(f"url: {url}")
-        print(f"orders: {orders}")
+        pprint(orders_to_place)
 
     headers = make_auth_headers(ts, path, apikey, secret)
-    res = requests.post(url, headers=headers, json=orders)
+    res = requests.post(url, headers=headers, json=orders_to_place)
 
     data = parse_response(res)
     print(json.dumps(data, indent=4, sort_keys=True))

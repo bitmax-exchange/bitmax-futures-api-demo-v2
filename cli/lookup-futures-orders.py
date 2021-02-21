@@ -25,12 +25,14 @@ def run(config, botname, order_id, verbose):
     url = f"{host}/{group}/api/pro/" + path
 
     ts = utc_timestamp()
+    query = dict(orderId=order_id)
 
     if verbose:
         print(f"url: {url}")
+        pprint(query)
 
     headers = make_auth_headers(ts, path, apikey, secret)
-    res = requests.get(url, headers=headers, params=dict(orderId=order_id))
+    res = requests.get(url, headers=headers, params=query)
 
     data = parse_response(res)
     print(json.dumps(data, indent=4, sort_keys=True))

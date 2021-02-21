@@ -21,7 +21,7 @@ def run(config, botname, symbol, order_id, verbose):
     apikey = cfg['apikey']
     secret = cfg['secret']
 
-    url = f"{host}/{group}/api/pro/v2/futures/order"
+    url = f"{host}/{group}/api/pro/v2/futures/order/batch"
 
     ts = utc_timestamp()
 
@@ -31,9 +31,9 @@ def run(config, botname, symbol, order_id, verbose):
 
     I = lambda s: s * (num // len(s))
 
-    orders = []
+    orders_to_cancel = {"orders":[]}
     for (s, i) in zip(I(vs), I(vi)) :
-        orders.append(dict(
+        orders_to_cancel["orders"].append(dict(
             id = uuid32(),
             time = ts,
             symbol = s,
@@ -42,10 +42,10 @@ def run(config, botname, symbol, order_id, verbose):
 
     if verbose:
         print(f"url: {url}")
-        print(f"order: {orders}")
+        pprint(orders_to_cancel)
 
-    headers = make_auth_headers(ts, "v2/futures/order", apikey, secret)
-    res = requests.delete(url, headers=headers, json=orders)
+    headers = make_auth_headers(ts, "v2/futures/order/batch", apikey, secret)
+    res = requests.delete(url, headers=headers, json=orders_to_cancel)
 
     data = parse_response(res)
     print(json.dumps(data, indent=4, sort_keys=True))
