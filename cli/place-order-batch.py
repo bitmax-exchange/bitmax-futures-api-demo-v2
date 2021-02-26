@@ -15,8 +15,9 @@ from util import *
 @click.option("--qty", type=str, default='0.1')
 @click.option("--order-type", type=str, default="limit")
 @click.option("--side", type=click.Choice(['buy', 'sell']), default='buy')
+@click.option("--resp-inst", type=click.Choice(['ACK', 'ACCEPT', 'DONE']), default="ACK")
 @click.option('--verbose/--no-verbose', default=False)
-def run(config, botname, symbol, price, qty, order_type, side, verbose):
+def run(config, botname, symbol, price, qty, order_type, side, resp_inst, verbose):
     
     cfg = load_config(get_config_or_default(config), botname)
 
@@ -35,13 +36,14 @@ def run(config, botname, symbol, price, qty, order_type, side, verbose):
     vq = qty.split(',')
     vt = order_type.split(',')
     vsd = side.split(',')
+    vri= resp_inst.split(',')
 
-    num = max(len(vs), len(vp), len(vq), len(vt), len(vsd))
+    num = max(len(vs), len(vp), len(vq), len(vt), len(vsd), len(vri))
 
     I = lambda s: s * (num // len(s))
 
     orders_to_place = {"orders":[],}
-    for (s, p, q, t, sd) in zip(I(vs), I(vp), I(vq), I(vt), I(vsd)):
+    for (s, p, q, t, sd, ri) in zip(I(vs), I(vp), I(vq), I(vt), I(vsd), I(vri)):
         orders_to_place["orders"].append(dict(
             id = uuid32(),
             time = ts,
@@ -50,6 +52,7 @@ def run(config, botname, symbol, price, qty, order_type, side, verbose):
             orderQty = str(q),
             orderType = t,
             side = sd.lower(),
+            respInst = ri,
         ))
 
     if verbose:
