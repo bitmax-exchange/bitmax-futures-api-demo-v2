@@ -52,6 +52,7 @@ def create_protocol(apikey, secret):
             self.authenticate()
 
             # self.send("""{"op":"sub","id":"abc123456","ch":"depth-realtime:BTC-PERP"}""")
+            # self.send("""{"op":"sub","id":"abc123456","ch":"depth-realtime:BTC-PERP"}""")
             # self.send("""{"op":"sub","id":"abc123456","ch":"bbo:BTC-PERP"}""")
             # self.send("""{"op":"sub","id":"abc123456","ch":"futures-pricing-data"}""")
             # self.send("""{"op":"sub","id":"abc123456","ch":"futures-order"}""")
@@ -63,7 +64,7 @@ def create_protocol(apikey, secret):
             # self.send("""{"op":"req","action":"barhist","id":"abc123456","args":{"symbol":"BTC-PERP","interval":"1d","from":1579427383528,"to":1610531443528,"v":null}}""")
             # self.send("""{"op":"req","action":"barhist","id":"abc123456","args":{"symbol":"BTC-PERP","interval":"1d","from":1579427383528,"to":1610531443528,"v":null}}""")
 
-            self.send("""{"op":"req","action":"place-order","id":"sampleRequestId","ac":"futures","args":{"id":"sampleOrderId","symbol":"BTC-PERP","orderPrice":"40000","orderQty":"0.01","orderType":"limit","side":"buy"}}""")
+            self.send("""{"op":"req","action":"place-order","id":"sampleRequestId","ac":"futures","args":{"id":"sampleOrderId","symbol":"BTC-PERP","orderPrice":"35000.5","orderQty":"0.01","orderType":"limit","side":"buy"}}""")
 
             print("WebSocket connection open.")
 
