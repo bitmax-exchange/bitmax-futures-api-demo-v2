@@ -21,7 +21,7 @@ def get_timestamp() -> int:
 async def websocket_auth_demo(uri):
     ts = get_timestamp()
     async with websockets.client.connect(uri) as websocket:
-        await websocket.send("""{ "op": "sub", "id": "abc123", "ch":"trades:BTC/USDT" }""")
+        await websocket.send("""{ "op": "sub", "id": "abc123", "ch":"trades:BTC-PERP" }""")
         while True:
             msg = await websocket.recv()
             obj = json.loads(msg)
