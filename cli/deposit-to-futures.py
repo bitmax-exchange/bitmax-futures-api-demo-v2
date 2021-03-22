@@ -9,7 +9,7 @@ from util import *
 
 @click.command()
 @click.option("--config", type=str, default=None, help="path to the config file")
-@click.option("--botname", type=click.Choice(["bitmax", "bitmax-sandbox"]), default="bitmax-sandbox", help="specify the bot to use")
+@click.option("--botname", type=str, default="bitmax", help="specify the bot to use")
 @click.option("--asset", type=str, default='BTC')
 @click.option("--amount", type=str, default=1, help="0.1")
 @click.option('--verbose/--no-verbose', default=False)

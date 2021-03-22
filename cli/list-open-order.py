@@ -25,7 +25,7 @@ def run(config, botname, symbol, verbose):
     ts = utc_timestamp()
 
     reqParams = dict()
-    if symbol: reqParams['symbol'] = symbol  # specify symbol to close position
+    if symbol: reqParams['symbol'] = symbol  # specify symbol to list open orders
 
     if verbose:
         print(f"url: {url}")
