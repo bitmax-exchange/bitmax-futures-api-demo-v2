@@ -8,11 +8,12 @@ from util import *
 
 @click.command()
 @click.option("--config", type=str, default=None, help="path to the config file")
-@click.option("--botname", type=click.Choice(["bitmax", "bitmax-sandbox"]), default="bitmax-sandbox", help="specify the bot to use")
-@click.option('--cancel-open/--no-cancel-open', default=True)
+@click.option("--botname", type=click.Choice(["bitmax", "bitmax-sandbox"]), default="bitmax-sandbox",
+              help="specify the bot to use")
+@click.option('--cancel-open/--no-cancel-open', default=None)
+@click.option("--symbol", type=str, default=None, help="symbol: BTC-PERP")
 @click.option('--verbose/--no-verbose', default=False)
-def run(config, botname, cancel_open, verbose):
-    
+def run(config, botname, cancel_open, symbol, verbose):
     cfg = load_config(get_config_or_default(config), botname)
 
     host = cfg['base-url']
@@ -21,11 +22,12 @@ def run(config, botname, cancel_open, verbose):
     secret = cfg['secret']
 
     url = f"{host}/{group}/api/pro/v2/futures/position/all"
-    
+
     ts = utc_timestamp()
-    closeAllPos = dict(
-        cancelOpen = cancel_open  # to cancel all open orders and then close position
-    )
+    closeAllPos = dict()
+
+    if symbol: closeAllPos['symbol'] = symbol  # specify symbol to close position
+    if cancel_open!=None: closeAllPos['cancelOpen'] = cancel_open  # cancel open orders and then close position
 
     if verbose:
         print(f"url: {url}")
@@ -36,7 +38,6 @@ def run(config, botname, cancel_open, verbose):
 
     data = parse_response(res)
     print(json.dumps(data, indent=4, sort_keys=True))
-
 
 
 if __name__ == "__main__":
